@@ -1,0 +1,33 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      SETTINGS
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-list>
+
+    <ion-item class="ion-activatable" routerLink="/defaults"> <!--Calls alarm default screen-->
+      <ion-icon name="alarm-sharp" size="large" color="primary"></ion-icon>
+      <ion-label style="padding-left: 10px">Alarm defaults</ion-label> 
+      <ion-icon name="chevron-forward-sharp" size="large" color="primary"></ion-icon>
+    </ion-item>
+
+    <ion-item class="ion-activatable" routerLink="/location"> <!--Calls location screen-->
+      <ion-icon name="location-sharp" size="large" color="primary"></ion-icon>
+      <ion-label style="padding-left: 10px">Set location</ion-label>
+      <ion-icon name="chevron-forward-sharp" size="large" color="primary"></ion-icon>
+    </ion-item>
+
+    <ion-item> <!--Toggles theme-->
+      <ion-icon name="color-palette-sharp" size="large" color="primary"></ion-icon>
+      <ion-label style="padding-left: 10px">Dark theme</ion-label>
+      <ion-toggle checked="{{themeToggleDefault}}" [(ngModel)]="themeToggleDefault" (ionChange)="changeData()" slot="end"></ion-toggle>
+    </ion-item>
+    
+  </ion-list>
+
+</ion-content>

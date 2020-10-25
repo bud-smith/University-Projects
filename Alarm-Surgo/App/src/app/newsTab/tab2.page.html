@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      TODAYS LATEST
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!--If data undefined, display progress bar.-->
+  <ion-progress-bar *ngIf="!locationCheck" type="indeterminate"></ion-progress-bar>
+  
+  <ion-card *ngIf="locationCheck && data"> <!--if data defined, display card of current weather API response-->
+    <ion-card-header><!--Location output-->
+      <ion-card-subtitle>CURRENT WEATHER</ion-card-subtitle>
+      <ion-card-title style="text-transform:uppercase">{{location}}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content> <!--Weather output-->
+      <div class="weatherIcon"> <ion-img src="{{icon}}"></ion-img> </div>
+      <div class="temperatureValue"><ion-label><b>{{temperature}}</b> with <b>{{type}}</b> skies.</ion-label></div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card color="danger" *ngIf="locationCheck && data">
+    <ion-card-header>
+      <ion-card-title>COVID-19</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content> <!--Covid output-->
+      <div><ion-label>{{country}}</ion-label></div>
+      <div><ion-label>Total Cases: {{confirmed}}</ion-label></div>
+      <div><ion-label>Deaths: {{deaths}}</ion-label></div>
+      <div><ion-label>Recovered: {{recovered}}</ion-label></div>
+      <div><ion-label>Active: {{active}}</ion-label></div>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngIf="locationCheck && data"> <!--If data defined, display card of cards of news API response -->
+    <ion-card-header>
+      <ion-card-title>LATEST NEWS</ion-card-title>
+    </ion-card-header>
+    
+    <ion-card *ngFor="let article of data?.articles"> <!--New articles-->
+      <div *ngIf="checkImageUrl(article.urlToImage)"> <!--If url valid, contine-->
+        <img class="centreImage" (click)="openBrowser(article.url)" [src]="article.urlToImage">
+      <ion-card-content> <!--Display article title, date, and description-->
+        <ion-card-title (click)="openBrowser(article.url)"> {{article.title}} </ion-card-title>
+        <ion-card-subtitle>{{article.publishedAt | date: 'MMM d, y, h:mm a'}}</ion-card-subtitle>
+        <p [innerHTML]="stripHtmlTags(article.description)"> </p>
+      </ion-card-content>
+      </div>
+    </ion-card>
+  </ion-card>
+
+</ion-content>

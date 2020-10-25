@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>DEFAULT ALARM</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item>
+      <ion-text>Ringtone</ion-text> <!--Selecting rintone-->
+      <ion-select slot="end" value="{{ringtoneDefault}}" [(ngModel)]="ringtoneDefault" (ionChange)="changeRingtone()">
+        <ion-select-option>None</ion-select-option>
+        <ion-select-option value="Buzz Beep">Buzz Beep</ion-select-option>
+        <ion-select-option value="Buzzer">Buzzer</ion-select-option>
+        <ion-select-option value="Electronic">Electronic</ion-select-option>
+        <ion-select-option value="High Squeeze">High Squeeze</ion-select-option>
+        <ion-select-option value="Low Squeeze">Low Squeeze</ion-select-option>
+        <ion-select-option value="Sci-Fi">Sci-Fi</ion-select-option>
+        <ion-select-option value="Siren">Siren</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>Play ringtone</ion-label> <!--Playing rintone-->
+      <ion-button (click)="playAudio()" size="medium"><ion-icon name="play" size="large" style="margin: -5px;"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item> <!--Toggling default snooze-->
+      <ion-label>Snooze</ion-label>
+      <ion-toggle checked="{{snoozeToggleDefault}}" [(ngModel)]="snoozeToggleDefault" (ionChange)="snoozeToggle()"></ion-toggle>
+    </ion-item>
+  </ion-list>
+</ion-content>

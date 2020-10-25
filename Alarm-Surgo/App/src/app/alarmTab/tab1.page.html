@@ -1,0 +1,41 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="ion-text-center">
+      ALARM
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+
+  <ion-list *ngIf="alarm.length"> <!--Displays list of created alarms-->
+    <ion-item-sliding *ngFor="let a of alarm; index as i">
+      <ion-item>
+        <ion-label>
+          <h2><b>{{a.time | date: "shortTime"}}</b> <ion-text style="padding-left: 10px">{{a.label}}</ion-text> </h2>
+          <p> {{a.repeat}} </p>
+        </ion-label>
+        <ion-checkbox checked="true"></ion-checkbox>
+      </ion-item>
+
+      <ion-item-options side="end"> <!--Slider for editing and deleting alarms-->
+        <ion-button (click)="editAlarm(i)">
+          <ion-icon name="create-outline"></ion-icon>
+        </ion-button>
+        <ion-button color="danger" (click)="deleteAlarm(i)">
+          <ion-icon name="trash-outline"></ion-icon>
+        </ion-button>
+        
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <div *ngIf="!alarm.length" class="allignCentre">No Alarms</div> <!--Displayed when no alarms are set-->
+
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed"> <!--Floating action button used to add alarms-->
+    <ion-fab-button (click)="addAlarm()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+</ion-content>

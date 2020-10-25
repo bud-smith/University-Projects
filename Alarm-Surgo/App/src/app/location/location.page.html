@@ -1,0 +1,16 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title style="text-align: center;">LOCATION</ion-title>
+    <ion-buttons slot="end" (click)="findCurrentLocation()">
+      <ion-button slot="end"><ion-icon name="locate" ></ion-icon></ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content> 
+  <ion-searchbar (keyup.enter)="closeKeyboard(label)" [(ngModel)]="label" showCancelButton="focus"></ion-searchbar> <!--Search bar to change location-->
+  <div #map id='map' style="height: 90.27%"></div><!--Displays map and pin from Google-->
+</ion-content>

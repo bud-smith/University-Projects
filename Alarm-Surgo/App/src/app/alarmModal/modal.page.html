@@ -1,0 +1,87 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button color="dark" (click)="cancelModal()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>
+      ALARM
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  
+  <ion-list>
+  
+    <ion-item> <!--Label input-->
+      <ion-label>Label</ion-label>
+      <ion-input inputmode="text" maxlength="24" [(ngModel)]="label" (keyup.enter)="closeKeyboard()" style="text-align: end;"></ion-input>
+    </ion-item>
+
+    <ion-item> <!--Time select-->
+      <ion-text>Time</ion-text><ion-label color="danger">*</ion-label>
+      <ion-datetime required displayFormat="h:mm A" [(ngModel)]="time" side="right" style="text-align: end;"></ion-datetime>
+    </ion-item>
+
+    <ion-item> <!--Repeat select-->
+      <ion-label>Repeat</ion-label> 
+      <ion-select placeholder="Never" multiple="true" [(ngModel)]="repeat">
+        <ion-select-option value=" Mon">Monday</ion-select-option>
+        <ion-select-option value=" Tue">Tuesday</ion-select-option>
+        <ion-select-option value=" Wed">Wednesday</ion-select-option>
+        <ion-select-option value=" Thur">Thursday</ion-select-option>
+        <ion-select-option value=" Fri">Friday</ion-select-option>
+        <ion-select-option value=" Sat">Saturday</ion-select-option>
+        <ion-select-option value=" Sun">Sunday</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item> <!--Ringtone select-->
+      <ion-text>Ringtone</ion-text><ion-text color="danger">*</ion-text>
+      <ion-select required [(ngModel)]="ringtone" slot="end">
+        <ion-select-option value="Buzz Beep">Buzz Beep</ion-select-option>
+        <ion-select-option value="Buzzer">Buzzer</ion-select-option>
+        <ion-select-option value="Electronic">Electronic</ion-select-option>
+        <ion-select-option value="High Squeeze">High Squeeze</ion-select-option>
+        <ion-select-option value="Low Squeeze">Low Squeeze</ion-select-option>
+        <ion-select-option value="Sci-Fi">Sci-Fi</ion-select-option>
+        <ion-select-option value="Siren">Siren</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <ion-item> <!--Button to play audio-->
+      <ion-label>Play ringtone</ion-label>
+      <ion-button (click)="playAudio()" size="medium"><ion-icon name="play" size="large" style="margin: -5px;"></ion-icon></ion-button>
+    </ion-item>
+
+    <ion-item> <!--Snooze toggle-->
+      <ion-label>Snooze</ion-label>
+      <ion-toggle checked="true" [(ngModel)]="snooze"></ion-toggle>
+    </ion-item>
+
+    <ion-item> <!--Image select-->
+      <ion-label>Add an image</ion-label>
+      <div class="pictureButtonArea">
+        <ion-button class="pictureButton" (click)="viewPictures()">
+          <ion-icon size="large" name="image-outline"></ion-icon>
+        </ion-button>
+        
+        <div *ngIf="picture"> <!--If picture defined, allow for picture removal-->
+          <ion-button class="pictureButton" (click)="removePictures()" color="danger">
+            <ion-icon size="large" name="close-outline"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+
+      <div *ngIf="picture" class="pictureArea"> <!--If picture defined, display picture-->
+        <img src="{{picture}}" style="height: 108px; width:108px" />
+      </div>
+    </ion-item>
+  </ion-list>
+
+  <!--Close modal-->
+  <ion-button expand="full" (click)="doneModal()">Done</ion-button>
+
+</ion-content>
